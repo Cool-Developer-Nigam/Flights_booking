@@ -4,13 +4,13 @@ class CrudRepository {
     }
 
     async create(data) {
-        try {
+        // try {
             const response = await this.model.create(data);
             return response;
-        } catch (error) {
-            console.error('Something went wrong in the Crud Repository: create method', error);
-            throw error;
-        }   
+        // } catch (error) {
+        //     console.error('Something went wrong in the Crud Repository: create method', error);
+        //     throw error;
+        // }   
     }
 
     async destroy(data) {

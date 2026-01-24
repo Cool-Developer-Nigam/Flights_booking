@@ -71,12 +71,16 @@ async function createAirplane(req, res) {
         });
         SuccessResponse.data = airplane;
         SuccessResponse.message = 'Airplane created successfully';
-        return res.status(StatusCodes.CREATED).json(SuccessResponse);
+        return res
+        .status(StatusCodes.CREATED)
+        .json(SuccessResponse);
     } catch (error) {
         console.log(error);
         ErrorResponse.error = error;
         ErrorResponse.message = 'Something went wrong while creating airplane';
-        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ErrorResponse);
+        return res
+        .status(error.statusCode || StatusCodes.INTERNAL_SERVER_ERROR)
+        .json(ErrorResponse);
     }
 }
 
@@ -90,7 +94,9 @@ async function getAirplanes(req, res) {
         console.log(error);
         ErrorResponse.error = error;
         ErrorResponse.message = 'Something went wrong while fetching airplanes';
-        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ErrorResponse);
+        return res
+        .status(error.statusCode || StatusCodes.INTERNAL_SERVER_ERROR)
+        .json(ErrorResponse);
     }
 }
 

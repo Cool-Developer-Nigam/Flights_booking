@@ -1,4 +1,7 @@
+const {StatusCodes} = require('http-status-codes');
+
 const {AirplaneRepository}= require('../repositories');
+const AppError = require('../utils/errors/app-error');
 
 const airplaneRepository = new AirplaneRepository();
 
@@ -7,7 +10,16 @@ async function createAirplane(data){
         const airplane = await airplaneRepository.create(data);
         return airplane;
     } catch (error) {
-        throw error;
+       if(error.name=='sequelizeValidationError'){
+        let explanation =[];
+        console.log(error);
+        error.errors.forEach((err)=>{
+            explanation.push(err.message);
+        });
+        console.log(explanation);
+        throw new AppError('Cannot create airplane object',StatusCodes.INTERNAL_SERVER_ERROR);
+       }
+        throw new AppError('Cannot create airplane object',StatusCodes.INTERNAL_SERVER_ERROR)   ;
     }   
 }
 
