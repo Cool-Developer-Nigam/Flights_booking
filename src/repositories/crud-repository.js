@@ -15,6 +15,10 @@ class CrudRepository {
            const response = await this.model.destroy({
                 where: { id: data }
             });
+
+            if(response===0){
+                throw new AppError('Not able to found the entity',StatusCodes.NOT_FOUND);
+            }
             return response;
     }
 
