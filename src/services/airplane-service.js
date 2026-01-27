@@ -10,7 +10,7 @@ async function createAirplane(data){
         const airplane = await airplaneRepository.create(data);
         return airplane;
     } catch (error) {
-       if(error.name=='sequelizeValidationError'){
+       if(error.name=='SequelizeValidationError'){
         let explanation =[];
         console.log(error);
         error.errors.forEach((err)=>{
