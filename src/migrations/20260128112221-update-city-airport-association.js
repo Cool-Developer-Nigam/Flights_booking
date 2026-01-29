@@ -14,7 +14,7 @@ module.exports = {
         field: 'id'
       },
       onDelete: 'CASCADE',
-      onUpdate: 'CASCADE'
+
     });
     /**
      * Add altering commands here.
