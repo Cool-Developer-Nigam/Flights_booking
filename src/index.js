@@ -31,7 +31,8 @@ async function startServer() {
         await db.sequelize.authenticate();
         console.log('Database connected successfully');
         try {
-            app.listen(ServerConfig.PORT, '0.0.0.0', () => {
+            // bind to localhost explicitly to avoid potential IPv6/OS binding issues during dev
+            app.listen(ServerConfig.PORT, '127.0.0.1', () => {
                 console.log(`Successfully started the server on PORT : ${ServerConfig.PORT}`);
             });
         } catch (listenError) {
