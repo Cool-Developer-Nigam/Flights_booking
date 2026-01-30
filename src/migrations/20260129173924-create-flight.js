@@ -11,7 +11,13 @@ module.exports = {
       },
       flightNumber: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
+        references: {
+          model: 'Airplanes',
+          key: 'id'
+        },
+        onDelete: 'CASCADE',
+       
       },
       airplaneId: {
         type: Sequelize.INTEGER,
@@ -23,20 +29,20 @@ module.exports = {
         onDelete: 'CASCADE',
       },
       departureAirportId: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: false,
         references: {
           model: 'Airports',
-          key: 'id'
+          key: 'code'
         },
         onDelete: 'CASCADE',
       },
       arrivalAirportId: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: false,
         references: {
           model: 'Airports',
-          key: 'id'
+          key: 'code'
         },
         onDelete: 'CASCADE',
       },
