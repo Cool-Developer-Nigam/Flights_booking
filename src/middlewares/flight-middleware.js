@@ -51,6 +51,14 @@ function validateCreateRequest(req, res, next) {
         ErrorResponse.error = new AppError('totalSeats not found in the request body', StatusCodes.BAD_REQUEST);
         return res.status(StatusCodes.BAD_REQUEST).json(ErrorResponse);
     }
+        // Validate that departureTime is less than arrivalTime
+        const departure = new Date(req.body.departureTime);
+        const arrival = new Date(req.body.arrivalTime);
+        if (departure >= arrival) {
+            ErrorResponse.message = 'Departure time must be less than arrival time';
+            ErrorResponse.error = new AppError('departureTime must be less than arrivalTime', StatusCodes.BAD_REQUEST);
+            return res.status(StatusCodes.BAD_REQUEST).json(ErrorResponse);
+        }
 
     next();
 }
