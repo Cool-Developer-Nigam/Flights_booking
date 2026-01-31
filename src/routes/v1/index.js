@@ -6,6 +6,7 @@ const { AirplaneMiddlewares } = require('../../middlewares');
 
 const cityRoutes = require('./city-routes');
 const airportRoutes = require('./airport-routes');
+const flightRoutes = require('./flight-routes');
 const router = express.Router();
 
 router.post('/airplanes', AirplaneMiddlewares.validateCreateRequest, AirplaneController.createAirplane);
@@ -18,5 +19,7 @@ router.use('/airports', airportRoutes);
 router.put('/airplanes/:id', 
     AirplaneMiddlewares.validateCreateRequest,
     AirplaneController.updateAirplane);
+
+router.use('/flights', flightRoutes);
 
 module.exports = router;
